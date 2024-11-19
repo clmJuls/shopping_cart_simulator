@@ -22,10 +22,23 @@ class ItemController extends Controller
     }
 
     public function destroy($id)
-{
-    $item = Item::findOrFail($id);
-    $item->delete();
+    {
+        $item = Item::findOrFail($id);
+        $item->delete();
 
-    return redirect()->route('store');
-}
+        return redirect()->route('store');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $item = Item::findOrFail($id);
+
+        $item->update($request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'stock' => 'required|integer',
+        ]));
+
+        return redirect()->route('store');
+    }
 }

@@ -5,23 +5,41 @@ import Modal from "./Components/modal";
 export default function Store({ items: initialItems }) {
     const [items, setItems] = useState(initialItems);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [itemIdToDelete, setItemIdToDelete] = useState(null);
+    const [modalType, setModalType] = useState(null);
+    const [currentItem, setCurrentItem] = useState(null);
 
-    const openModal = (id) => {
-        setItemIdToDelete(id);
+    const openEditModal = (item) => {
+        setCurrentItem(item);
+        setModalType('edit');
+        setIsModalOpen(true);
+    };
+
+    const openDeleteModal = (item) => {
+        setCurrentItem(item);
+        setModalType('delete');
         setIsModalOpen(true);
     };
 
     const closeModal = () => {
         setIsModalOpen(false);
-        setItemIdToDelete(null);
+        setCurrentItem(null);
+        setModalType(null);
+    };
+
+    const handleEdit = (updatedItem) => {
+        Inertia.put(`/items/${updatedItem.id}`, updatedItem, {
+            onSuccess: () => {
+                setItems(items.map(item => item.id === updatedItem.id ? updatedItem : item));
+                closeModal();
+            },
+        });
     };
 
     const handleDelete = () => {
-        if (itemIdToDelete) {
-            Inertia.delete(`/items/${itemIdToDelete}`, {
+        if (currentItem) {
+            Inertia.delete(`/items/${currentItem.id}`, {
                 onSuccess: () => {
-                    setItems(items.filter(item => item.id !== itemIdToDelete));
+                    setItems(items.filter(item => item.id !== currentItem.id));
                     closeModal();
                 },
             });
@@ -46,28 +64,38 @@ export default function Store({ items: initialItems }) {
                             ${item.price}
                         </p>
                         <p className="text-gray-600">Stock: {item.stock}</p>
-                        <button
-                            onClick={() => openModal(item.id)}
-                            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition-colors duration-300 mt-2"
-                        >
-                            Delete
-                        </button>
+                        <div className="flex space-x-2 mt-2">
+                            <button
+                                onClick={() => openEditModal(item)}
+                                className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition-colors duration-300"
+                            >
+                                Edit
+                            </button>
+                            <button
+                                onClick={() => openDeleteModal(item)}
+                                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition-colors duration-300"
+                            >
+                                Delete
+                            </button>
+                        </div>
                     </li>
                 ))}
             </ul>
             <div className="flex justify-center mt-6">
-                <a href="/items"><button
-                    className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors duration-300"
-                >
-                    Add Item
-                </button>
+                <a href="/items">
+                    <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors duration-300">
+                        Add Item
+                    </button>
                 </a>
             </div>
-            <Modal
-                isOpen={isModalOpen}
-                onClose={closeModal}
-                onConfirm={handleDelete}
-            />
+            {currentItem && (
+                <Modal
+                    isOpen={isModalOpen}
+                    onClose={closeModal}
+                    onConfirm={modalType === 'edit' ? handleEdit : handleDelete}
+                    item={currentItem}
+                />
+            )}
         </div>
     );
 }
