@@ -14,5 +14,7 @@ Route::get('/items', function () {
     return Inertia::render('Items');
 });
 
-Route::post('/items', [ItemController::class, 'store'])->name('items.store');
+Route::post('/items', [ItemController::class, 'store'])->name('store');
+
+Route::delete('/items/{id}', [ItemController::class, 'destroy']);
 
