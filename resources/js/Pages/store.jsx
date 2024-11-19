@@ -35,15 +35,13 @@ export default function Store({ items: initialItems }) {
         });
     };
 
-    const handleDelete = () => {
-        if (currentItem) {
-            Inertia.delete(`/items/${currentItem.id}`, {
-                onSuccess: () => {
-                    setItems(items.filter(item => item.id !== currentItem.id));
-                    closeModal();
-                },
-            });
-        }
+    const handleDelete = (id) => {
+        Inertia.delete(`/items/${id}`, {
+            onSuccess: () => {
+                setItems(items.filter(item => item.id !== id));
+                closeModal();
+            },
+        });
     };
 
     return (
@@ -94,6 +92,7 @@ export default function Store({ items: initialItems }) {
                     onClose={closeModal}
                     onConfirm={modalType === 'edit' ? handleEdit : handleDelete}
                     item={currentItem}
+                    isEdit={modalType === 'edit'}
                 />
             )}
         </div>
