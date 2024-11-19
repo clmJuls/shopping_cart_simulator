@@ -2,17 +2,17 @@
 
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use App\Http\Controllers\CartController;
+use App\Http\Controllers\ItemController;
 
-Route::get('/', function () {
-    return Inertia::render('home');
-});
-
-Route::get('/items', function () {
-    return Inertia::render('Items', [
+Route::get('/store', function () {
+    return Inertia::render('store', [
         'items' => \App\Models\Item::all()
     ]);
 });
 
-Route::post('/cart/add/{id}', [CartController::class, 'addToCart'])->name('cart.add');
+Route::get('/items', function () {
+    return Inertia::render('Items');
+});
+
+Route::post('/items', [ItemController::class, 'store'])->name('items.store');
 

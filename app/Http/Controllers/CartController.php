@@ -10,18 +10,27 @@ class CartController extends Controller
     public function addToCart(Request $request, $id)
     {
         $item = \App\Models\Item::find($id);
+        $quantity = $request->input('quantity', 1);
+
+        if ($quantity > $item->stock) {
+            return redirect()->back()->with('error', 'Not enough stock available.');
+        }
+
         $cart = Session::get('cart', []);
 
         if (isset($cart[$id])) {
-            $cart[$id]['quantity']++;
+            $cart[$id]['quantity'] += $quantity;
         } else {
             $cart[$id] = [
                 "name" => $item->name,
-                "quantity" => 1,
+                "quantity" => $quantity,
                 "price" => $item->price,
                 "stock" => $item->stock
             ];
         }
+
+        $item->stock -= $quantity;
+        $item->save();
 
         Session::put('cart', $cart);
         return redirect()->back()->with('success', 'Item added to cart!');
