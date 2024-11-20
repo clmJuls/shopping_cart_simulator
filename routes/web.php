@@ -10,13 +10,22 @@ Route::get('/store', function () {
     ]);
 });
 
+
 Route::get('/items', function () {
     return Inertia::render('Items');
 });
+
 
 Route::post('/items', [ItemController::class, 'store'])->name('store');
 
 Route::delete('/items/{id}', [ItemController::class, 'destroy']);
 
 Route::put('/items/{id}', [ItemController::class, 'update']);
+
+Route::get('/customer', function () {
+    return Inertia::render('Customer', [
+        'items' => \App\Models\Item::all()
+    ]);
+});
+
 
