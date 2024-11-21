@@ -50,4 +50,10 @@ class OrderItemController extends Controller
         $orderItem->delete();
         return response()->json(['message' => 'Order item deleted successfully']);
     }
+
+    public function getOrderItemsByOrderId($orderId)
+    {
+        $orderItems = OrderItem::with('item')->where('order_id', $orderId)->get();
+        return response()->json($orderItems);
+    }
 }

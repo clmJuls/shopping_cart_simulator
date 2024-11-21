@@ -13,8 +13,30 @@ function CustomerOrders() {
                 return response.json();
             })
             .then(data => {
-                console.log('Fetched orders:', data); // Try log
-                setOrders(data);
+                console.log('Fetched orders:', data);
+                // Fetch orderItems for each order
+                const ordersWithItems = data.map(order => {
+                    return fetch(`/orders/${order.id}/items`)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Failed to fetch order items');
+                            }
+                            return response.json();
+                        })
+                        .then(items => {
+                            console.log(`Fetched items for order ${order.id}:`, items);
+                            return { ...order, orderItems: items };
+                        })
+                        .catch(error => {
+                            console.error(`Error fetching items for order ${order.id}:`, error);
+                            return { ...order, orderItems: [] }; // Return order with empty items on error
+                        });
+                });
+
+                // Wait for all orderItems fetches to complete
+                Promise.all(ordersWithItems).then(completeOrders => {
+                    setOrders(completeOrders);
+                });
             })
             .catch(error => {
                 console.error('Error fetching orders:', error);
@@ -55,5 +77,6 @@ function CustomerOrders() {
         </div>
     );
 }
+
 
 export default CustomerOrders;

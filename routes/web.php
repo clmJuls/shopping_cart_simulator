@@ -53,3 +53,5 @@ Route::get('/cashier/{id}', [CashierController::class, 'getCashierName']);
 Route::get('/api/orders-with-items', [OrderController::class, 'getOrders']);
 
 Route::get('/orders', [OrderController::class, 'index']);
+
+Route::get('/orders/{orderId}/items', [OrderItemController::class, 'getOrderItemsByOrderId']);
