@@ -8,6 +8,12 @@ use Inertia\Inertia;
 
 class ItemController extends Controller
 {
+    public function index()
+    {
+        $items = Item::all();
+        return Inertia::render('Items/Index', ['items' => $items]);
+    }
+
     public function store(Request $request)
     {
         $request->validate([
