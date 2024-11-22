@@ -54,11 +54,11 @@ export default function Store({ items: initialItems }) {
     };
 
     return (
-        <div className="container mx-auto p-6 bg-gray-100 rounded-lg shadow-lg">
+        <div className="container mx-auto p-6 bg-gray-100 rounded-lg shadow-lg ">
             <div className="flex justify-between items-center mb-6">
                 <a href="/cashier">
                     <button className="bg-blue-600 text-white py-2 px-4 rounded shadow-md hover:bg-blue-500 hover:shadow-lg transition-all duration-300">
-                        Store
+                        Cashier
                     </button>
                 </a>
                 <h1 className="text-3xl font-bold text-center text-blue-600">

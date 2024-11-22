@@ -124,12 +124,14 @@ export default function Modal({
                         Cancel
                     </button>
                     {isOrder ? (
+                        <a href="/customer">
                         <button
                             className="bg-blue-500 text-white px-4 py-2 rounded"
                             onClick={handleOrderSubmit}
                         >
-                            Proceed
-                        </button>
+                            Purchase
+                            </button>
+                        </a>
                     ) : (
                         <a href="/store">
                             <button

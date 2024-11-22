@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Modal from "./Components/modal";
 import { Inertia } from "@inertiajs/inertia";
 
-const Customer = ({ items, cashierId }) => {
+const Customer = ({ items }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
     const [quantity, setQuantity] = useState(1);
@@ -108,7 +108,7 @@ const Customer = ({ items, cashierId }) => {
                 </ul>
             </div>
             {/* Display Items */}
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center mb-4 container mx-auto">
                 <h1 className="text-2xl font-bold mb-4">
                     Customer Page
                 </h1>

@@ -69,6 +69,5 @@ class OrderItemController extends Controller
             $orderItem->delete();
         }
 
-        return response()->json(['message' => 'All order items deleted successfully']);
     }
 }

@@ -46,7 +46,6 @@ class OrderController extends Controller
             ]);
         }
 
-        return response()->json(['message' => 'Order created successfully'], 201);
     }
 
     public function destroy($id)

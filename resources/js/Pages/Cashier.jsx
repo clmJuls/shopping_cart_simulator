@@ -146,10 +146,7 @@ function CustomerOrders() {
                                 <p className="text-3xl font-bold mb-2">
                                     ${order.total_amount}
                                 </p>
-                                <p className="mb-4">
-                                    Package details for the customer's selected
-                                    plan or purchase.
-                                </p>
+                                
                                 <hr className="border-gray-700 mb-4" />
                                 <p className="font-bold mb-2">Items:</p>
                                 <ul className="list-disc list-inside mb-4">
