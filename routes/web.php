@@ -57,3 +57,7 @@ Route::get('/cashier/{id}', [CashierController::class, 'getCashierName']);
 Route::get('/orders', [OrderController::class, 'index']);
 
 Route::get('/orders/{orderId}/items', [OrderItemController::class, 'getOrderItemsByOrderId']);
+
+Route::delete('/orders/{orderId}/items', [OrderItemController::class, 'destroyByOrderId']);
+
+Route::delete('/orders/{id}', [OrderController::class, 'destroy']);

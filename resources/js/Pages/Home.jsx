@@ -4,7 +4,7 @@ function Home() {
     return (
         <>
             <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-blue-500 to-purple-600">
-                <h1 className="text-4xl font-bold text-white mb-8">
+                <h1 className="text-3xl md:text-4xl font-bold text-white mb-6">
                     Choose Your Role
                 </h1>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -16,16 +16,14 @@ function Home() {
                                     "url(/assets/bg_card_home.jfif)",
                             }}
                         >
-                            <h2 className="text-2xl font-bold text-white p-4">
-                                Customer
-                            </h2>
+                            
                         </div>
                         <div className="p-6 bg-black text-white">
                             <div className="flex justify-between items-center mb-4">
                                 <span className="bg-blue-500 text-xs text-white px-2 py-1 rounded">
                                     Role
                                 </span>
-                                <span className="text-sm">Free</span>
+                                <span className="text-sm">Customer</span>
                             </div>
                             <p className="text-gray-300 mb-4">
                                 As a customer, you can browse products, add them
@@ -61,16 +59,14 @@ function Home() {
                                     "url(/assets/bg_card_home.jfif)",
                             }}
                         >
-                            <h2 className="text-2xl font-bold text-white p-4">
-                                Cashier
-                            </h2>
+                            
                         </div>
                         <div className="p-6 bg-black text-white">
                             <div className="flex justify-between items-center mb-4">
                                 <span className="bg-green-500 text-xs text-white px-2 py-1 rounded">
                                     Role
                                 </span>
-                                <span className="text-sm">Free</span>
+                                <span className="text-sm">Cashier</span>
                             </div>
                             <p className="text-gray-300 mb-4">
                                 As a cashier, you can manage transactions,

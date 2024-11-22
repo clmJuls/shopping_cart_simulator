@@ -56,4 +56,19 @@ class OrderItemController extends Controller
         $orderItems = OrderItem::with('item')->where('order_id', $orderId)->get();
         return response()->json($orderItems);
     }
+
+    public function destroyByOrderId($orderId)
+    {
+        $orderItems = OrderItem::where('order_id', $orderId)->get();
+
+        if ($orderItems->isEmpty()) {
+            return response()->json(['message' => 'No order items found for this order'], 404);
+        }
+
+        foreach ($orderItems as $orderItem) {
+            $orderItem->delete();
+        }
+
+        return response()->json(['message' => 'All order items deleted successfully']);
+    }
 }

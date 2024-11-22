@@ -24,7 +24,7 @@ export default function Modal({
     if (!isOpen) return null;
 
     const handleEditSubmit = () => {
-        if (item) {x
+        if (item) {
             onConfirm({ id: item.id, name, price, stock });
         }
     };
@@ -131,14 +131,17 @@ export default function Modal({
                             Proceed
                         </button>
                     ) : (
-                        <a
-                            href="/store"
-                            onClick={
-                                isEdit ? handleEditSubmit : handleDeleteSubmit
-                            }
-                            className="bg-blue-500 text-white px-4 py-2 rounded"
-                        >
-                            {isEdit ? "Save" : "Delete"}
+                        <a href="/store">
+                            <button
+                                onClick={   
+                                    isEdit
+                                        ? handleEditSubmit
+                                        : handleDeleteSubmit
+                                }
+                                className="bg-blue-500 text-white px-4 py-2 rounded"
+                            >
+                                {isEdit ? "Save" : "Delete"}
+                            </button>
                         </a>
                     )}
                 </div>
