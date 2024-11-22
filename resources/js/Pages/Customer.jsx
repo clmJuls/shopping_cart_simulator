@@ -61,7 +61,7 @@ const Customer = ({ items, cashierId }) => {
         const customerId = customers.length > 0 ? customers[0].id : null;
 
         if (!customerId) {
-            console.error('No customer selected');
+            console.error("No customer selected");
             return;
         }
 
@@ -70,12 +70,12 @@ const Customer = ({ items, cashierId }) => {
         const order = {
             customer_id: customerId,
             cashier_id: cashierId,
-            order_date: new Date().toISOString().slice(0, 19).replace('T', ' '),
+            order_date: new Date().toISOString().slice(0, 19).replace("T", " "),
             total_amount: cart.reduce(
                 (total, item) => total + item.price * item.quantity,
                 0
             ),
-            items: cart.map(item => ({
+            items: cart.map((item) => ({
                 id: item.id,
                 quantity: item.quantity,
                 price: item.price,
@@ -83,9 +83,9 @@ const Customer = ({ items, cashierId }) => {
             })),
         };
 
-        console.log('Order to be sent:', order);
+        console.log("Order to be sent:", order);
 
-        Inertia.post('/orders', order, {
+        Inertia.post("/orders", order, {
             onSuccess: () => {
                 closeOrderModal();
                 setCart([]); // Clear cart after order is placed
@@ -108,7 +108,17 @@ const Customer = ({ items, cashierId }) => {
                 </ul>
             </div>
             {/* Display Items */}
-            <h1 className="text-2xl font-bold mb-4">Customer Page</h1>
+            <div className="flex justify-between items-center">
+                <h1 className="text-2xl font-bold mb-4">
+                    Customer Page
+                </h1>
+                <a
+                    href="/"
+                    className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                >
+                    Home
+                </a>
+            </div>
 
             <ul className="space-y-4">
                 {items.map((item) => (
