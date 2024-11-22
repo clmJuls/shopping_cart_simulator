@@ -8,6 +8,9 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CashierController;
 use App\Http\Controllers\OrderItemController;
 
+Route::get('/', function () {
+    return Inertia::render('Home');
+});
 
 Route::get('/store', function () {
     return Inertia::render('store', [
@@ -50,7 +53,6 @@ Route::get('/cashier', function () {
 
 Route::get('/cashier/{id}', [CashierController::class, 'getCashierName']);
 
-Route::get('/api/orders-with-items', [OrderController::class, 'getOrders']);
 
 Route::get('/orders', [OrderController::class, 'index']);
 
