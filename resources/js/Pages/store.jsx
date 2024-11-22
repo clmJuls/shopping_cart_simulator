@@ -8,24 +8,28 @@ export default function Store({ items: initialItems }) {
     const [modalType, setModalType] = useState(null);
     const [currentItem, setCurrentItem] = useState(null);
 
+    // Opens the edit modal for a specific item
     const openEditModal = (item) => {
         setCurrentItem(item);
         setModalType("edit");
         setIsModalOpen(true);
     };
 
+    // Opens the delete modal for a specific item
     const openDeleteModal = (item) => {
         setCurrentItem(item);
         setModalType("delete");
         setIsModalOpen(true);
     };
 
+    // Closes the modal and resets modal-related state
     const closeModal = () => {
         setIsModalOpen(false);
         setCurrentItem(null);
         setModalType(null);
     };
 
+    // Handles the edit action, updating the item and closing the modal on success
     const handleEdit = (updatedItem) => {
         console.log("Updated Item:", updatedItem);
 
@@ -44,6 +48,7 @@ export default function Store({ items: initialItems }) {
         });
     };
 
+    // Handles the delete action, removing the item and closing the modal on success
     const handleDelete = (id) => {
         Inertia.delete(`/items/${id}`, {
             onSuccess: () => {

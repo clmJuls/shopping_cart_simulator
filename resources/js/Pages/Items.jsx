@@ -2,13 +2,17 @@ import React, { useState } from "react";
 import { Inertia } from "@inertiajs/inertia";
 
 export default function Items() {
+    // State hooks to manage the input values for name, price, and stock
     const [name, setName] = useState("");
     const [price, setPrice] = useState("");
     const [stock, setStock] = useState("");
 
+    // Function to handle form submission
     const handleSubmit = (e) => {
-        e.preventDefault();
+        e.preventDefault(); // Prevents the default form submission behavior
+        // Sends a POST request to the server with the item details
         Inertia.post("/items", { name, price, stock });
+        // Resets the input fields after submission
         setName("");
         setPrice("");
         setStock("");
@@ -20,14 +24,14 @@ export default function Items() {
                 Add Item
             </h1>
             <form
-                onSubmit={handleSubmit}
+                onSubmit={handleSubmit} // Attaches the handleSubmit function to the form's submit event
                 className="bg-white p-6 rounded-lg shadow-lg mb-6"
             >
                 <input
                     type="text"
                     placeholder="Item Name"
                     value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={(e) => setName(e.target.value)} // Updates the name state on input change
                     className="border p-2 mb-4 w-full"
                     required
                 />
@@ -35,7 +39,7 @@ export default function Items() {
                     type="number"
                     placeholder="Price"
                     value={price}
-                    onChange={(e) => setPrice(e.target.value)}
+                    onChange={(e) => setPrice(e.target.value)} // Updates the price state on input change
                     className="border p-2 mb-4 w-full"
                     required
                 />
@@ -43,7 +47,7 @@ export default function Items() {
                     type="number"
                     placeholder="Stock"
                     value={stock}
-                    onChange={(e) => setStock(e.target.value)}
+                    onChange={(e) => setStock(e.target.value)} // Updates the stock state on input change
                     className="border p-2 mb-4 w-full"
                     required
                 />

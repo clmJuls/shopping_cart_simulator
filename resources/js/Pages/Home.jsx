@@ -1,5 +1,6 @@
 import React from "react";
 
+// Home component renders the main page with role selection cards
 function Home() {
     return (
         <>
@@ -8,6 +9,7 @@ function Home() {
                     Choose Your Role
                 </h1>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {/* Customer role card */}
                     <div className="bg-white shadow-lg rounded-lg overflow-hidden max-w-sm">
                         <div
                             className="bg-cover bg-center h-32"
@@ -16,8 +18,8 @@ function Home() {
                                     "url(/assets/bg_card_home.jfif)",
                             }}
                         >
-                            
                         </div>
+                        {/* Card content */}
                         <div className="p-6 bg-black text-white">
                             <div className="flex justify-between items-center mb-4">
                                 <span className="bg-blue-500 text-xs text-white px-2 py-1 rounded">
@@ -51,6 +53,7 @@ function Home() {
                             </div>
                         </div>
                     </div>
+                    {/* Cashier role card */}
                     <div className="bg-white shadow-lg rounded-lg overflow-hidden max-w-sm">
                         <div
                             className="bg-cover bg-center h-32"
@@ -59,8 +62,8 @@ function Home() {
                                     "url(/assets/bg_card_home.jfif)",
                             }}
                         >
-                            
                         </div>
+                        {/* Card content */}
                         <div className="p-6 bg-black text-white">
                             <div className="flex justify-between items-center mb-4">
                                 <span className="bg-green-500 text-xs text-white px-2 py-1 rounded">

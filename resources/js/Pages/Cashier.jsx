@@ -13,6 +13,7 @@ function CustomerOrders() {
         fetchOrders();
     }, []);
 
+    // Fetches orders from the server and their associated items
     const fetchOrders = () => {
         fetch("/orders")
             .then((response) => {
@@ -54,6 +55,7 @@ function CustomerOrders() {
             });
     };
 
+    // Deletes an order by its ID
     const deleteOrder = (orderId) => {
         fetch(`/orders/${orderId}`, {
             method: "DELETE",
@@ -80,15 +82,18 @@ function CustomerOrders() {
             });
     };
 
+    // Toggles the visibility of the paid orders modal
     const togglePaidModal = () => {
         setIsPaidModalOpen(!isPaidModalOpen);
     };
 
+    // Toggles the visibility of the cashout modal and sets the selected order
     const toggleCashoutModal = (order) => {
         setSelectedOrder(order);
         setIsCashoutModalOpen(!isCashoutModalOpen);
     };
 
+    // Confirms the cashout of an order, moving it to the paid orders list
     const confirmCashout = () => {
         setPaidOrders([...paidOrders, selectedOrder]);
         setOrders(orders.filter((order) => order.id !== selectedOrder.id));

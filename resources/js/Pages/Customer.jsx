@@ -12,6 +12,7 @@ const Customer = ({ items }) => {
     const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
 
     useEffect(() => {
+        // Fetches customer data from the server when the component mounts
         const fetchCustomers = async () => {
             try {
                 const response = await fetch("/customers");
@@ -28,35 +29,42 @@ const Customer = ({ items }) => {
         fetchCustomers();
     }, []);
 
+    // Opens the modal to add an item to the cart
     const openModal = (item) => {
         setSelectedItem(item);
         setIsModalOpen(true);
     };
 
+    // Closes the modal and resets the selected item and quantity
     const closeModal = () => {
         setIsModalOpen(false);
         setSelectedItem(null);
         setQuantity(1);
     };
 
+    // Adds the selected item to the cart with the specified quantity
     const confirmAddToCart = () => {
         setCart([...cart, { ...selectedItem, quantity }]);
         console.log(`Added ${quantity} of ${selectedItem.name} to cart`);
         closeModal();
     };
 
+    // Toggles the visibility of the cart
     const toggleCartVisibility = () => {
         setIsCartVisible(!isCartVisible);
     };
 
+    // Opens the order modal
     const openOrderModal = () => {
         setIsOrderModalOpen(true);
     };
 
+    // Closes the order modal
     const closeOrderModal = () => {
         setIsOrderModalOpen(false);
     };
 
+    // Confirms the order and sends it to the server
     const confirmOrder = () => {
         const customerId = customers.length > 0 ? customers[0].id : null;
 
@@ -183,7 +191,6 @@ const Customer = ({ items }) => {
                 >
                     🛒
                 </button>
-                {/* Orders Button */}
                 <button
                     onClick={openOrderModal}
                     className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 mt-2"
